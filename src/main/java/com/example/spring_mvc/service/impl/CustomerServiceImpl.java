@@ -36,4 +36,24 @@ public class CustomerServiceImpl implements CustomerService {
         // Ví dụ:
         customerRepository.deleteById(customerId);
     }
+
+    @Override
+    public Customer getCustomerById(Long customerId) {
+        return customerRepository.findById(customerId).orElse(null);
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        try {
+            // Kiểm tra xem khách hàng có tồn tại trong cơ sở dữ liệu không
+            if (customerRepository.existsById(customer.getId())) {
+                customerRepository.save(customer); // Cập nhật thông tin khách hàng
+            } else {
+                // Xử lý trường hợp không tìm thấy khách hàng
+                System.out.println("Không tìm thấy khách hàng để cập nhật");
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }

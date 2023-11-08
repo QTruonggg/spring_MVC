@@ -16,6 +16,9 @@
 <body>
 <div class="container">
     <h1>Customer List</h1>
+    <a href="/customer/getFormCreate">
+        <button type="button" class="btn btn-success mb-3">Create</button>
+    </a>
     <table class="table">
         <thead>
         <tr>
@@ -36,6 +39,9 @@
                 <td>
                     <a href="/customer/delete/${customer.id}">
                         <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                    <a href="/customer/getFormUpdate/${customer.id}">
+                        <button type="button" class="btn btn-primary">Update</button>
                     </a>
                 </td>
             </tr>

@@ -61,4 +61,28 @@ public class CustomerController {
         return "redirect:/customer/getAll";
     }
 
+    @GetMapping("/getFormUpdate/{customerId}")
+    public String getFormUpdate(@PathVariable Long customerId, ModelMap modelMap) {
+        String view = "createOrUpdateCustomerForm";
+        try {
+            Customer customer = customerService.getCustomerById(customerId);
+            modelMap.addAttribute("customer", customer);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return view;
+    }
+
+    @PostMapping("/update/{customerId}")
+    public String updateCustomer(@PathVariable Long customerId, @ModelAttribute("customer") Customer customer, ModelMap modelMap) {
+        String view = "redirect:/customer/getAll";
+        try {
+            customer.setId(customerId); // Cập nhật ID cho khách hàng
+            customerService.saveCustomer(customer);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return view;
+    }
+
 }
